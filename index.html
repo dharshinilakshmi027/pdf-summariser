@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Summarizer - Extract Key Information from PDFs</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">📄 PDF Summarizer</h1>
+                <p class="tagline">Quickly extract and summarize key information from PDF documents</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="upload-card">
+                    <div class="upload-icon">📤</div>
+                    <h2>Upload Your PDF</h2>
+                    <p>Select a PDF file to get started with summarization</p>
+                    
+                    <div class="file-input-wrapper">
+                        <input 
+                            type="file" 
+                            id="pdfFile" 
+                            accept=".pdf" 
+                            class="file-input"
+                        >
+                        <label for="pdfFile" class="file-label">
+                            <span class="label-text">Choose PDF File</span>
+                        </label>
+                    </div>
+
+                    <div class="file-info" id="fileInfo" style="display: none;">
+                        <p>📄 <span id="fileName"></span></p>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="uploadBtn" class="btn btn-primary" disabled>
+                            Analyze PDF
+                        </button>
+                        <button id="clearBtn" class="btn btn-secondary" style="display: none;">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Options Section -->
+            <section class="options-section" id="optionsSection" style="display: none;">
+                <div class="options-card">
+                    <h3>Summarization Options</h3>
+                    
+                    <div class="option-group">
+                        <label for="summaryLength">Summary Length:</label>
+                        <select id="summaryLength" class="option-select">
+                            <option value="short">Short (3-5 sentences)</option>
+                            <option value="medium" selected>Medium (5-10 sentences)</option>
+                            <option value="long">Long (10-15 sentences)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="extractKeypoints" checked>
+                            Extract Key Points
+                        </label>
+                    </div>
+
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="extractMetadata" checked>
+                            Extract Metadata
+                        </label>
+                    </div>
+
+                    <button id="summarizeBtn" class="btn btn-success">
+                        Generate Summary
+                    </button>
+                </div>
+            </section>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>Processing your PDF...</p>
+            </div>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <!-- Metadata -->
+                <div class="results-card" id="metadataCard" style="display: none;">
+                    <h3>📋 Document Information</h3>
+                    <div class="metadata-grid">
+                        <div class="metadata-item">
+                            <span class="metadata-label">Pages:</span>
+                            <span id="pageCount">-</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-label">File Size:</span>
+                            <span id="fileSize">-</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-label">Words:</span>
+                            <span id="wordCount">-</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-label">Upload Date:</span>
+                            <span id="uploadDate">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div class="results-card">
+                    <h3>✨ AI Summary</h3>
+                    <div id="summaryContent" class="summary-content"></div>
+                </div>
+
+                <!-- Key Points -->
+                <div class="results-card" id="keypointsCard" style="display: none;">
+                    <h3>🔑 Key Points</h3>
+                    <ul id="keypointsList" class="keypoints-list"></ul>
+                </div>
+
+                <!-- Full Text -->
+                <div class="results-card">
+                    <h3>📖 Full Text</h3>
+                    <div id="fullText" class="full-text"></div>
+                </div>
+
+                <!-- Actions -->
+                <div class="action-buttons">
+                    <button id="downloadBtn" class="btn btn-primary">
+                        📥 Download Summary
+                    </button>
+                    <button id="copyBtn" class="btn btn-secondary">
+                        📋 Copy to Clipboard
+                    </button>
+                    <button id="newPdfBtn" class="btn btn-secondary">
+                        ➕ Process New PDF
+                    </button>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 PDF Summarizer. All rights reserved.</p>
+            <p>Built with ❤️ for document analysis</p>
+        </footer>
+    </div>
+
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
